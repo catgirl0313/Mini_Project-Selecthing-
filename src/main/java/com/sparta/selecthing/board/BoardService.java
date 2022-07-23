@@ -3,10 +3,12 @@ package com.sparta.selecthing.board;
 import com.sparta.selecthing.comment.Comment;
 import com.sparta.selecthing.comment.CommentRepository;
 import com.sparta.selecthing.comment.CommentSaveRequestDto;
-import com.sparta.selecthing.user.User;
-import com.sparta.selecthing.user.UserRepository;
+import com.sparta.selecthing.member.Member;
+import com.sparta.selecthing.member.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 public class BoardService {
@@ -28,6 +30,18 @@ public class BoardService {
 //                .orElseThrow(() -> new IllegalArgumentException("글 상세보기 실패 : 아이디를 찾을 수 없습니다."));
 //        return new BoardDto(entity);
 //    }
+
+    //게시글 등록
+    @Transactional
+    public Board createBoard(BoardRequestDto boardRequestDto, Long memberId) {
+       Member member_temp = userRepository.findById(memberId)
+               .orElseThrow(() -> new IllegalArgumentException("id 오류"));
+
+        Board board = new Board(boardRequestDto, member_temp);
+
+        return null;
+    }
+
     @Transactional
     public Board showDetailedBoard(Long id) {
         return boardRepository.findById(id)
@@ -44,7 +58,7 @@ public class BoardService {
     @Transactional
     public void writeComment(CommentSaveRequestDto commentSaveRequestDto) {
 
-        User user = userRepository.findById(commentSaveRequestDto.getUserId()).orElseThrow(() -> {
+        Member member = userRepository.findById(commentSaveRequestDto.getUserId()).orElseThrow(() -> {
             return new IllegalArgumentException("댓글 쓰기 실패 : 유저 id를 찾을 수 없습니다.");
         });
 
@@ -53,7 +67,7 @@ public class BoardService {
         });
 
         Comment comment = new Comment();
-        comment.update(user, board, commentSaveRequestDto.getContent());
+        comment.update(member, board, commentSaveRequestDto.getContent());
 
         commentRepository.save(comment);
 

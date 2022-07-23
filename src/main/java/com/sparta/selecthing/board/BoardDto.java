@@ -2,7 +2,7 @@ package com.sparta.selecthing.board;
 
 
 import com.sparta.selecthing.comment.CommentResponseDto;
-import com.sparta.selecthing.user.User;
+import com.sparta.selecthing.member.Member;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +15,7 @@ import java.util.List;
 public class BoardDto {
     private Long id;
 
-    private User user;
+    private Member member;
     private Board board;
     private List<CommentResponseDto> comments;
     private int agreeCount = 0;

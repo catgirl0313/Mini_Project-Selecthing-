@@ -1,11 +1,10 @@
 package com.sparta.selecthing.board;
 
-import com.sparta.selecthing.comment.Comment;
 import com.sparta.selecthing.comment.CommentResponseDto;
 import com.sparta.selecthing.comment.CommentSaveRequestDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +17,16 @@ public class BoardController {
 
     public BoardController(BoardService boardService) {
         this.boardService = boardService;
+    }
+
+    //게시글 작성
+    @PostMapping("/newBoards") //@AuthenticationPrincipal principalDetail principalDetail
+    public String board(@RequestBody BoardRequestDto boardRequestDto,
+                       @AuthenticationPrincipal UserDetailsImpl userDetails){
+        Long memberId = userDetails.getMember().getId();
+        Board board = boardService.createBoard(boardRequestDto, memberId);
+
+        return "200 ok";
     }
 
     //상세 게시글 열람
