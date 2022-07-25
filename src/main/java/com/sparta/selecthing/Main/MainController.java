@@ -16,7 +16,7 @@ public class MainController {
     @GetMapping("/selecthing") //메인 투척.
     public List<MainResponseDto> showMains(MainResponseDto mainResponseDto) {
 
-        return mainService.showMains(mainResponseDto);
 
+        return mainService.showMains(mainResponseDto);
     }
 }

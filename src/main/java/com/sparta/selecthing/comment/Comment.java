@@ -55,7 +55,7 @@ public class Comment {
     private String updatedBy;
 
     public void update(Member member, Board board, String content) {
-        setUser(member);
+        setMember(member);
         setBoard(board);
         setContent(content);
     }
