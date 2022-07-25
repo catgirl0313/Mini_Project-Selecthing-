@@ -35,23 +35,6 @@ public class Member {
     //@ColumnDfalt("'user'")
     //private String role; Enum - admin, user, manager 역할 입력해보기
 
-    @CreatedDate
-    @Column(nullable = false, updatable = false)
-    private LocalDateTime createdAt;
-
-    @CreatedBy
-    @Column(nullable = false,updatable = false)
-    private String createdBy; //누가 만들었는지도 알려줘야해 . 왜?
-
-    @LastModifiedDate
-    @Column(nullable = false, insertable = false)
-    private LocalDateTime updatedAt;
-
-    @LastModifiedBy
-    @Column(nullable = false, insertable = false)
-    private String updatedBy;
-
-
     public Member(String username, String password, String nickname) {
         this.username = username;
         this.password = password;

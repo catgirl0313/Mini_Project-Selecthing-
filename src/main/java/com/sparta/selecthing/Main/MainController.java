@@ -1,5 +1,6 @@
 package com.sparta.selecthing.Main;
 
+import com.sparta.selecthing.member.Member;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,9 +15,7 @@ public class MainController {
     }
 
     @GetMapping("/selecthing") //메인 투척.
-    public List<MainResponseDto> showMains(MainResponseDto mainResponseDto) {
-
-
-        return mainService.showMains(mainResponseDto);
+    public List<MainResponseDto> showMains() {
+        return mainService.showMains();
     }
 }

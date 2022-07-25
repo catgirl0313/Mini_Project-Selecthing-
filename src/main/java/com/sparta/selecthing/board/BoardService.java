@@ -5,11 +5,8 @@ import com.sparta.selecthing.comment.CommentRepository;
 import com.sparta.selecthing.comment.CommentSaveRequestDto;
 import com.sparta.selecthing.member.Member;
 import com.sparta.selecthing.member.MemberRepository;
-import com.sparta.selecthing.user.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Service
 public class BoardService {
@@ -34,13 +31,15 @@ public class BoardService {
 
     //게시글 등록
     @Transactional
-    public Board createBoard(BoardRequestDto boardRequestDto, Long memberId) {
+    public String createBoard(BoardRequestDto boardRequestDto, Long memberId) {
        Member member_temp = memberRepository.findById(memberId)
                .orElseThrow(() -> new IllegalArgumentException("id 오류"));
 
-        Board board = new Board(boardRequestDto, member_temp);
+        Board board = new Board(boardRequestDto, member_temp).;
 
-        return null;
+        boardRepository.save(board);
+
+        return "ok";
     }
 
     @Transactional
