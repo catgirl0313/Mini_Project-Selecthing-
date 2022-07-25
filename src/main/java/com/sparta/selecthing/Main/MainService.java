@@ -4,7 +4,6 @@ import com.sparta.selecthing.board.Board;
 import com.sparta.selecthing.board.BoardRepository;
 import com.sparta.selecthing.comment.CommentRepository;
 import com.sparta.selecthing.member.MemberRepository;
-import com.sparta.selecthing.user.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,8 +23,15 @@ public class MainService {
     }
 
     @Transactional
-    public List<MainResponseDto> showMains(MainResponseDto mainResponseDto) {
-        List<Board> boardall = boardRepository.findAll();
-    return null;
+    public List<MainResponseDto> showMains() {
+        List<Board> boardAll = boardRepository.findAll();
+        List<MainResponseDto> mainResponseDtoList = null;
+        for(Board temp : boardAll)
+        {
+            MainResponseDto mainResponseDtoTemp = new MainResponseDto(temp.getTitle(),temp.getImage(),temp.getContent(),temp.getMember());
+            mainResponseDtoList.add(mainResponseDtoTemp);
+        }
+
+    return mainResponseDtoList;
     }
 }

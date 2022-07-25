@@ -62,8 +62,6 @@ public class Board {
     @Column(insertable = false)
     private String updatedBy;
 
-
-
     public Board(BoardRequestDto boardRequestDto, Member member_temp) {
         this.title = boardRequestDto.getTitle();
         this.content = boardRequestDto.getContent();

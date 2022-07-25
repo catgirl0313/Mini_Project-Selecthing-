@@ -17,12 +17,13 @@ public class MainResponseDto {
     private String image;
     private String content;
 
-    public MainResponseDto(BoardRequestDto boardRequestDto, Member member_temp) {
+    public MainResponseDto(String title, String image, String content,
+                           Member member_temp) {
         this.username = member_temp.getUsername();
         this.nickName = member_temp.getNickname();
-        this.title = boardRequestDto.getTitle();
-        this.content = boardRequestDto.getContent();
-        this.image = boardRequestDto.getImage();
+        this.title = title;
+        this.content = content;
+        this.image = image;
     }
 }
 

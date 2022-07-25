@@ -10,8 +10,6 @@ import java.util.Date;
 @AllArgsConstructor //전체변수를 생성하는 생성자를 만들어준다.
 @Data //@Getter, @Setter 합쳐놓은 종합 선물 세트.
 public class BoardRequestDto {
-    private String username;
-    private String nickName;
     private String title;
     private String content;
     private String image;
