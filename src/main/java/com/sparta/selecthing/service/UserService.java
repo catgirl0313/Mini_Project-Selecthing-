@@ -44,6 +44,7 @@ public class UserService {
         String username = requestDto.getUsername();
         String password = requestDto.getPassword();
         String password2 = requestDto.getPassword2();
+        String nickName = requestDto.getNickName();
         String pattern = "^[a-zA-Z0-9]*$";
 
         // 회원 ID 중복 확인
@@ -70,7 +71,7 @@ public class UserService {
         requestDto.setPassword(password);
 
         // 유저 정보 저장
-        User user = new User(username, password);
+        User user = new User(username, password, nickName);
         userRepository.save(user);
         return error;
     }
