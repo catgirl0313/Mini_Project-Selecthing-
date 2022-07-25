@@ -1,18 +1,19 @@
 package com.sparta.selecthing.comment;
 
 import com.sparta.selecthing.board.Board;
-import com.sparta.selecthing.board.BoardRepository;
+import com.sparta.selecthing.member.Member;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CommentService {
     private final CommentRepository commentRepository;
-    private final BoardRepository boardRepository;
 
-    public CommentService(CommentRepository commentRepository, BoardRepository boardRepository) {
+    public CommentService(CommentRepository commentRepository) {
         this.commentRepository = commentRepository;
-        this.boardRepository = boardRepository;
     }
 
 //    //댓글 목록보기
@@ -26,28 +27,17 @@ public class CommentService {
 //
 //
 //    }
+
     @Transactional
-    public void writeComment(Long id, CommentSaveRequestDto commentSaveRequestDto){
-        Board board = boardRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("게시글을 찾을 수 없습니다.")
-        );
-        String content = commentSaveRequestDto.getContent();
+    public void writeComment(CommentSaveRequestDto commentSaveRequestDto) {
+        Member member = memberRepository.findByNickname(commentSaveRequestDto.getUsername())
+                .orElseThrow(() -> new IllegalArgumentException("없는 회원입니다."));
 
-        Comment writeComment = new Comment(board, content);
+        Board board = boardRepository.findById(commentSaveRequestDto.getBoardId())
+                .orElseThrow(() -> new IllegalArgumentException("댓글 쓰기 실패 : 게시글 id를 찾을 수 없습니다."));
 
-        commentRepository.save(writeComment);
+        commentRepository.save(comment.createComments(member, board, commentSaveRequestDto.getContent());
     }
-
-//    @Transactional
-//    public void writeComment(CommentSaveRequestDto commentSaveRequestDto) {
-//        Member member = memberRepository.findByNickname(commentSaveRequestDto.getUsername())
-//                .orElseThrow(() -> new IllegalArgumentException("없는 회원입니다."));
-//
-//        Board board = boardRepository.findById(commentSaveRequestDto.getBoardId())
-//                .orElseThrow(() -> new IllegalArgumentException("댓글 쓰기 실패 : 게시글 id를 찾을 수 없습니다."));
-//
-//        commentRepository.save(comment.createComments(member, board, commentSaveRequestDto.getContent());
-//    }
 
 //        Comment comment = new Comment();
 //        comment.writeComment(member, board, commentSaveRequestDto.getContent());

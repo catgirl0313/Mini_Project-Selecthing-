@@ -21,8 +21,6 @@ public class BoardDto {
     private String content;
     private String image;
 
-    private boolean agree = false;
-    private boolean disagree = false;
     private int agreeCount = 0;
     private int disagreeCount = 0;
 

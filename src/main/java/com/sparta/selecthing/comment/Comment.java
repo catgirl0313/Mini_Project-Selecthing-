@@ -54,9 +54,10 @@ public class Comment {
     @Column(insertable = false)
     private String updatedBy;
 
-    public Comment(Board board, String content) {
-        this.board = board;
-        this.content = content;
+    public void createComments(Member member, Board board, String content) {
+        setMember(member);
+        setBoard(board);
+        setContent(content);
     }
 
 }
