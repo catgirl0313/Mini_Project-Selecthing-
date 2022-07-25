@@ -4,7 +4,7 @@ import com.sparta.selecthing.comment.Comment;
 import com.sparta.selecthing.comment.CommentRepository;
 import com.sparta.selecthing.comment.CommentSaveRequestDto;
 import com.sparta.selecthing.member.Member;
-import com.sparta.selecthing.member.UserRepository;
+import com.sparta.selecthing.member.MemberRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,12 +13,12 @@ public class BoardService {
 
     private final BoardRepository boardRepository;
     private final CommentRepository commentRepository;
-    private final UserRepository userRepository;
+    private final MemberRepository memberRepository;
 
-    public BoardService(BoardRepository boardRepository, CommentRepository commentRepository, UserRepository userRepository) {
+    public BoardService(BoardRepository boardRepository, CommentRepository commentRepository, MemberRepository memberRepository) {
         this.boardRepository = boardRepository;
         this.commentRepository = commentRepository;
-        this.userRepository = userRepository;
+        this.memberRepository = memberRepository;
     }
 
     //글 상세보기
@@ -44,7 +44,7 @@ public class BoardService {
     @Transactional
     public void writeComment(CommentSaveRequestDto commentSaveRequestDto) {
 
-        Member member = userRepository.findById(commentSaveRequestDto.getUserId()).orElseThrow(() -> {
+        Member member = memberRepository.findById(commentSaveRequestDto.getUserId()).orElseThrow(() -> {
             return new IllegalArgumentException("댓글 쓰기 실패 : 유저 id를 찾을 수 없습니다.");
         });
 
