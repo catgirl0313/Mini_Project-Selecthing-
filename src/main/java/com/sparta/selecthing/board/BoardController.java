@@ -1,15 +1,11 @@
 package com.sparta.selecthing.board;
 
-import com.sparta.selecthing.comment.Comment;
-import com.sparta.selecthing.comment.CommentResponseDto;
-import com.sparta.selecthing.comment.CommentSaveRequestDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 @RestController
 //@RestController
 public class BoardController {
@@ -20,32 +16,21 @@ public class BoardController {
         this.boardService = boardService;
     }
 
+
     //상세 게시글 열람
-    @GetMapping("/board/{id}")
-    public Board showDetailedBoard(@PathVariable Long id) {
+    @GetMapping("/boards/{boardId}/details")
+    public BoardDto showDetailedBoard(@PathVariable Long boardId) {
 //        model.addAttribute("board", boardService.showDetailedBoard(id));
-        return boardService.showDetailedBoard(id);
+        return boardService.showDetailedBoard(boardId);
     }
     //상세 게시글 삭제
-    @DeleteMapping("/board/{id}")
-    public ResponseEntity<BoardDto> deleteBoard(@PathVariable Long id) {
-        boardService.deleteBoard(id);
+    @DeleteMapping("/boards/{boardId}/details")
+    public ResponseEntity<BoardDto> deleteBoard(@PathVariable Long boardId) {
+        boardService.deleteBoard(boardId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    //댓글 작성
-    @PostMapping("/board/{id}/comment") //@AuthenticationPrincipal principalDetail principalDetail
-    public ResponseEntity<CommentResponseDto> writeComment(
-            @PathVariable Long id, @RequestBody CommentSaveRequestDto commentSaveRequestDto){
-        boardService.writeComment(commentSaveRequestDto);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-    //댓글 삭제
-    @DeleteMapping("/board/{id}/comment/{commentId}")
-    public ResponseEntity<BoardDto> deleteComment(@PathVariable Long commentId){
-        boardService.deleteComment(commentId);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+
 
 
 

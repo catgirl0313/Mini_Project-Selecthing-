@@ -15,20 +15,29 @@ import java.util.List;
 public class BoardDto {
     private Long id;
 
-    private Member member;
-    private Board board;
-    private List<CommentResponseDto> comments;
+    private String title;
+    private String nickname;
+    private String mbti;
+    private String content;
+    private String image;
+
     private int agreeCount = 0;
     private int disagreeCount = 0;
 
-//    public BoardDto(Board entity) {
-//        this.id = entity.getId();
-//        this.nickname = entity.getNickname();
-//        this.mbti = entity.getMbti();
-//        this.image = entity.getImage();
-//        this.title = entity.getTitle();
-//        this.content = entity.getContent();
-//        this.agreeCount = entity.getAgreeCount();
-//        this.disagreeCount = entity.getDisagreeCount();
-//    }
+//    private Board board;
+
+    private List<CommentResponseDto> comments;
+
+
+    public BoardDto(Board board, List<CommentResponseDto> comments) {
+        this.id = board.getId();
+        this.title = board.getTitle();
+        this.nickname = board.getMember().getNickname();
+        this.mbti = board.getMember().getMbti();
+        this.content = board.getContent();
+        this.image = board.getImage();
+        this.agreeCount = getAgreeCount();
+        this.disagreeCount = getDisagreeCount();
+        this.comments = comments;
+    }
 }
