@@ -32,13 +32,12 @@ public class BoardController {
         return "200 ok";
     }
 */
+    //실험용.
     @PostMapping("/newBoards/{id}") //@AuthenticationPrincipal principalDetail principalDetail
     public String board(@RequestBody BoardRequestDto boardRequestDto,
                        @PathVariable Long id){
-        Long memberId = id;
-        Board board = boardService.createBoard(boardRequestDto, memberId);
 
-        return "200 ok";
+        return boardService.createBoard(boardRequestDto, id);
     }
 
     //상세 게시글 열람

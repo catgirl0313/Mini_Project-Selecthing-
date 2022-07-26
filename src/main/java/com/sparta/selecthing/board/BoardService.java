@@ -14,12 +14,10 @@ import java.util.List;
 public class BoardService {
 
     private final BoardRepository boardRepository;
-    private final CommentRepository commentRepository;
     private final MemberRepository memberRepository;
 
-    public BoardService(BoardRepository boardRepository, CommentRepository commentRepository, MemberRepository memberRepository) {
+    public BoardService(BoardRepository boardRepository, MemberRepository memberRepository) {
         this.boardRepository = boardRepository;
-        this.commentRepository = commentRepository;
         this.memberRepository = memberRepository;
     }
 
@@ -41,7 +39,7 @@ public class BoardService {
 
         boardRepository.save(board);
 
-        return "ok";
+        return "200 ok";
     }
 
     @Transactional
