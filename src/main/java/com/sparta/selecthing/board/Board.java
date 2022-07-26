@@ -2,7 +2,7 @@ package com.sparta.selecthing.board;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sparta.selecthing.comment.Comment;
-import com.sparta.selecthing.member.*;
+import com.sparta.selecthing.member.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -35,16 +35,20 @@ public class Board {
     @Column //@Lob : 대용량 데이터
     private String content;
 
-    private String image; //url
+    private String image; //??
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "Member_id")
+    @JoinColumn(name = "user_id")
     private Member member; //DB는 객체를 저장할 수 없음. java는 가능.
 
     @OneToMany(mappedBy = "board", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE) //mappedBy 연관관계의 주인이 아니다(나는 FK가 아니에요) DB에 컬럼 만들지 마세요.
     @JsonIgnoreProperties({"board"})
     @OrderBy("id desc")
     private List<Comment> comments;
+
+
+
+
 
     @CreatedDate
     @Column(updatable = false)
@@ -62,10 +66,13 @@ public class Board {
     @Column(insertable = false)
     private String updatedBy;
 
-    public Board(BoardRequestDto boardRequestDto, Member member_temp) {
-        this.title = boardRequestDto.getTitle();
-        this.content = boardRequestDto.getContent();
-        this.image = boardRequestDto.getImage();
-        this.member = member_temp;
-    }
+
+
+
+//    public Board(String title, String writer, String content) {
+//        this.title = title;
+//        this.writer = writer;
+//        this.content = content;
+//    }
+
 }

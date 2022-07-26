@@ -1,8 +1,9 @@
 package com.sparta.selecthing.comment;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import com.sparta.selecthing.board.BoardDto;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,12 +16,28 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    //상세 게시글 보기(댓글 포함?
-    @GetMapping("/api/{boardId}/comments") //게시글마다 댓글 다르니까~!
-    public List<CommentResponseDto> showComments(@PathVariable Long boardId) {
-        return commentService.showComments(boardId);
+//    //상세 게시글 보기(댓글 포함?
+//    @GetMapping("/api/{boardId}/comments") //게시글마다 댓글 다르니까~!
+//    public List<CommentResponseDto> showComments(@PathVariable Long boardId) {
+//        return commentService.showComments(boardId);
+//
+//    }
 
+    //댓글 작성
+    @PostMapping("/board/{boardId}/comments") //@AuthenticationPrincipal principalDetail principalDetail
+    public ResponseEntity<CommentResponseDto> writeComment(
+            @PathVariable Long boardId, @RequestBody CommentSaveRequestDto commentSaveRequestDto){
+        commentSaveRequestDto.setUsername(userDtails.getMember().getNickname());
+        commentService.writeComment(commentSaveRequestDto);
+        return new ResponseEntity.status(HttpStatus.OK)
+                .body("성공!");
     }
+    //댓글 삭제
+//    @DeleteMapping("/board/{boardId}/comments")
+//    public ResponseEntity<BoardDto> deleteComment(@PathVariable Long commentId){
+//        boardService.deleteComment(commentId);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
 
 //    // 댓글 목록 보기
 //    @GetMapping("/api/comment/{articlesId}")

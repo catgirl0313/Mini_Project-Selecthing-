@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -54,7 +55,7 @@ public class Comment {
     @Column(insertable = false)
     private String updatedBy;
 
-    public void update(Member member, Board board, String content) {
+    public void createComments(Member member, Board board, String content) {
         setMember(member);
         setBoard(board);
         setContent(content);
