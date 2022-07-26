@@ -3,7 +3,6 @@ package com.sparta.selecthing.board;
 import com.sparta.selecthing.comment.CommentRepository;
 import com.sparta.selecthing.comment.CommentResponseDto;
 import com.sparta.selecthing.member.MemberRepository;
-import com.sparta.selecthing.comment.CommentSaveRequestDto;
 import com.sparta.selecthing.member.Member;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

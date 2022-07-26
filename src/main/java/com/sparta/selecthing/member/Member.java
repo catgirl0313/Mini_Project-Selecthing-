@@ -29,7 +29,7 @@ public class Member {
     @Column(nullable = false, unique = true)
     private String nickname;
 
-    @Column(nullable = false, unique = true)
+    @Column
     private String mbti;
 
     //@ColumnDfalt("'user'")

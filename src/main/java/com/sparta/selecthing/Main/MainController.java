@@ -1,6 +1,5 @@
 package com.sparta.selecthing.Main;
 
-import com.sparta.selecthing.member.Member;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

@@ -43,6 +43,7 @@ public class Comment {
     @Column(updatable = false)
     private LocalDateTime createdAt;
 
+    //누구에게 작성됬는가? => nickname or username
     @CreatedBy
     @Column(updatable = false)
     private String createdBy;
