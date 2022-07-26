@@ -5,7 +5,6 @@ import com.sparta.selecthing.comment.CommentResponseDto;
 import com.sparta.selecthing.member.MemberRepository;
 import com.sparta.selecthing.comment.CommentSaveRequestDto;
 import com.sparta.selecthing.member.Member;
-import com.sparta.selecthing.member.MemberRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

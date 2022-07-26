@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 @RestController
 //@RestController
 public class BoardController {
@@ -54,8 +53,6 @@ public class BoardController {
         boardService.deleteBoard(boardId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-
 
 
 
