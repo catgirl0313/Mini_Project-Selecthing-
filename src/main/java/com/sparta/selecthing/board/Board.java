@@ -2,7 +2,7 @@ package com.sparta.selecthing.board;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sparta.selecthing.comment.Comment;
-import com.sparta.selecthing.member.Member;
+import com.sparta.selecthing.member.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -35,7 +35,7 @@ public class Board {
     @Column //@Lob : 대용량 데이터
     private String content;
 
-    private String image; //??
+    private String image; //url제대로 되라.
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "member_id")
@@ -66,13 +66,10 @@ public class Board {
     @Column(insertable = false)
     private String updatedBy;
 
-
-
-
-//    public Board(String title, String writer, String content) {
-//        this.title = title;
-//        this.writer = writer;
-//        this.content = content;
-//    }
-
+    public Board(BoardRequestDto boardRequestDto, Member member_temp) {
+        this.title = boardRequestDto.getTitle();
+        this.content = boardRequestDto.getContent();
+        this.image = boardRequestDto.getImage();
+        this.member = member_temp;
+    }
 }
