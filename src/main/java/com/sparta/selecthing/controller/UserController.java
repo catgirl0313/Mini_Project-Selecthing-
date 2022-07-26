@@ -8,16 +8,14 @@ import com.sparta.selecthing.security.UserDetailsImpl;
 import com.sparta.selecthing.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
     private final UserService userService;
@@ -64,13 +62,13 @@ public class UserController {
 
     //아이디 중복 체크
     @GetMapping("user/login/userIds")
-    public Boolean idCheck(@RequestBody LoginIdCheckDto loginIdCheckDto){
+    public String idCheck(@RequestBody LoginIdCheckDto loginIdCheckDto){
         return userService.userIdCheck(loginIdCheckDto);
     }
 
     //닉네임 중복 체크
     @GetMapping("user/login/nickNames")
-    public Boolean nicNAmeCheck(@RequestBody LoginIdCheckDto loginIdCheckDto){
+    public String nicNAmeCheck(@RequestBody LoginIdCheckDto loginIdCheckDto){
         return userService.userNicNameCheck(loginIdCheckDto);
     }
 

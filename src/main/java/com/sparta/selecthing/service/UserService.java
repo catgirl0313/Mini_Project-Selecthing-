@@ -46,7 +46,7 @@ public class UserService {
         String username = requestDto.getUsername();
         String password = requestDto.getPassword();
         String password2 = requestDto.getPassword2();
-        String nickName = requestDto.getNickName();
+        String nickname = requestDto.getNickname();
         String pattern = "^[a-zA-Z0-9]*$";
 
         // 회원 ID 중복 확인
@@ -54,10 +54,14 @@ public class UserService {
         if (found.isPresent()) {
             return "중복된 id 입니다.";
         }
+        Optional<Member> founds = userRepository.findByNickname(nickname);
+        if (founds.isPresent()) {
+            return "중복된 nickname 입니다.";
+        }
 
         // 회원가입 조건
         if (username.length() < 3) {
-            return "닉네임을 3자 이상 입력하세요";
+            return "아이디를 3자 이상 입력하세요";
         } else if (!Pattern.matches(pattern, username)) {
             return "알파벳 대소문자와 숫자로만 입력하세요";
         } else if (!password.equals(password2)) {
@@ -65,7 +69,7 @@ public class UserService {
         } else if (password.length() < 4) {
             return "비밀번호를 4자 이상 입력하세요";
         } else if (password.contains(username)) {
-            return "비밀번호에 닉네임을 포함할 수 없습니다.";
+            return "비밀번호에 아이디를 포함할 수 없습니다.";
         }
 
         // 패스워드 인코딩
@@ -73,7 +77,7 @@ public class UserService {
         requestDto.setPassword(password);
 
         // 유저 정보 저장
-        Member member = new Member(username, password, nickName);
+        Member member = new Member(username, password, nickname);
         userRepository.save(member);
         return error;
     }
@@ -88,22 +92,20 @@ public class UserService {
     }
 
         // 아이디 중복 체크
-    public Boolean userIdCheck(LoginIdCheckDto loginIdCheckDto) {
+    public String userIdCheck(LoginIdCheckDto loginIdCheckDto) {
         Optional<Member> found = userRepository.findByUsername(loginIdCheckDto.getUsername());
         if (found.isPresent()) {
-            return true;
-        }else{
-            return false;
-        }
+            return "중복된 아이디 입니다.";
+        }return "사용 할 수 있는 아이디 입니다.";
     }
 
         // 닉네임 중복 체크
-    public boolean userNicNameCheck(LoginIdCheckDto loginIdCheckDto) {
+    public String userNicNameCheck(LoginIdCheckDto loginIdCheckDto) {
         Optional<Member> found = userRepository.findByNickname(loginIdCheckDto.getNicName());
         if (found.isPresent()) {
-            return true;
+            return "중복된 닉네임 입니다.";
         }else{
-            return false;
+            return "사용 할 수 있는 닉네임 입니다.";
         }
     }
 }
