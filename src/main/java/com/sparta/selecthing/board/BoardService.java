@@ -14,10 +14,12 @@ import java.util.List;
 public class BoardService {
 
     private final BoardRepository boardRepository;
+    private final CommentRepository commentRepository;
     private final MemberRepository memberRepository;
 
-    public BoardService(BoardRepository boardRepository, MemberRepository memberRepository) {
+    public BoardService(BoardRepository boardRepository, CommentRepository commentRepository, MemberRepository memberRepository) {
         this.boardRepository = boardRepository;
+        this.commentRepository = commentRepository;
         this.memberRepository = memberRepository;
     }
 
@@ -56,6 +58,6 @@ public class BoardService {
     @Transactional
     public void deleteBoard(Long id) {
         boardRepository.deleteById(id);
-    }
 
+    }
 }
