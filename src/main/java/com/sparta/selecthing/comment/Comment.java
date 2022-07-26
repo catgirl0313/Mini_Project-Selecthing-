@@ -1,12 +1,11 @@
 package com.sparta.selecthing.comment;
 
-import com.sparta.selecthing.user.User;
+import com.sparta.selecthing.member.Member;
 import com.sparta.selecthing.board.Board;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -33,7 +32,7 @@ public class Comment {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private Member member;
 
     @ManyToOne
     @JoinColumn(name = "board_id")
@@ -55,8 +54,8 @@ public class Comment {
     @Column(insertable = false)
     private String updatedBy;
 
-    public void update(User user, Board board, String content) {
-        setUser(user);
+    public void createComments(Member member, Board board, String content) {
+        setMember(member);
         setBoard(board);
         setContent(content);
     }

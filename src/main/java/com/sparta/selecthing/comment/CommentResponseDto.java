@@ -20,8 +20,8 @@ public class CommentResponseDto {
     public CommentResponseDto(Comment comment) {
         this.id = comment.getId();
         this.content = comment.getContent();
-        this.nickName = comment.getUser().getNickname();
-        this.mbti = comment.getUser().getMbti();
+        this.nickName = comment.getMember().getNickname();
+        this.mbti = comment.getMember().getMbti();
 
     }
 }

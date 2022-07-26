@@ -2,7 +2,7 @@ package com.sparta.selecthing.board;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sparta.selecthing.comment.Comment;
-import com.sparta.selecthing.user.User;
+import com.sparta.selecthing.member.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -39,7 +39,7 @@ public class Board {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    private User user; //DB는 객체를 저장할 수 없음. java는 가능.
+    private Member member; //DB는 객체를 저장할 수 없음. java는 가능.
 
     @OneToMany(mappedBy = "board", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE) //mappedBy 연관관계의 주인이 아니다(나는 FK가 아니에요) DB에 컬럼 만들지 마세요.
     @JsonIgnoreProperties({"board"})
