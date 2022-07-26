@@ -35,7 +35,7 @@ public class Board {
     @Column //@Lob : 대용량 데이터
     private String content;
 
-    private String image; //url
+    private String image; //url제대로 되라.
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "Member_id")

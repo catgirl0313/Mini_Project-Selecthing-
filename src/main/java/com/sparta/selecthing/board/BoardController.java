@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 @RestController
 //@RestController
 public class BoardController {
@@ -28,6 +29,7 @@ public class BoardController {
         return "200 ok";
     }
 */
+    //실험용.
     @PostMapping("/newBoards/{id}") //@AuthenticationPrincipal principalDetail principalDetail
     public String board(@RequestBody BoardRequestDto boardRequestDto,
                        @PathVariable Long id){
