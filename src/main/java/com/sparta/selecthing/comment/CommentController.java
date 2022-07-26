@@ -33,6 +33,7 @@ public class CommentController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(null);
     }
+//    .
     //댓글 삭제
 //    @DeleteMapping("/board/{boardId}/comments")
 //    public ResponseEntity<BoardDto> deleteComment(@PathVariable Long commentId){
