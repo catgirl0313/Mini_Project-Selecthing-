@@ -53,8 +53,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // api 요청 접근허용
                 .antMatchers("/user/**").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
-//                .antMatchers("**").permitAll()
-//                .antMatchers("/").permitAll()
+                .antMatchers("**").permitAll()
+                .antMatchers("/").permitAll()
 //                .antMatchers(HttpMethod.GET,"/api/contents").permitAll()
 //                .antMatchers(HttpMethod.GET, "/api/reply/**").permitAll()
 
