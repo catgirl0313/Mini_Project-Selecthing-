@@ -41,7 +41,7 @@ public class UserController {
             System.out.println(token);
             return token;
         } else {
-            return "닉네임 또는 패스워드를 확인해주세요";
+            return "false";
         }
     }
 
