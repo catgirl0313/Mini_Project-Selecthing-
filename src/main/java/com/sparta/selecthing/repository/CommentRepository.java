@@ -1,5 +1,7 @@
-package com.sparta.selecthing.comment;
+package com.sparta.selecthing.repository;
 
+import com.sparta.selecthing.model.Comment;
+import com.sparta.selecthing.dto.CommentResponseDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

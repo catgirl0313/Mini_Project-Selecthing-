@@ -1,6 +1,9 @@
-package com.sparta.selecthing.board;
+package com.sparta.selecthing.controller;
 
 
+import com.sparta.selecthing.service.BoardService;
+import com.sparta.selecthing.dto.BoardDto;
+import com.sparta.selecthing.dto.BoardRequestDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;

@@ -1,8 +1,7 @@
-package com.sparta.selecthing.member;
+package com.sparta.selecthing.repository;
 
+import com.sparta.selecthing.model.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.Optional;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
     Member findByNickname(String nickname);

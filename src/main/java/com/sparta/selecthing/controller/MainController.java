@@ -1,5 +1,7 @@
-package com.sparta.selecthing.Main;
+package com.sparta.selecthing.controller;
 
+import com.sparta.selecthing.Main.MainResponseDto;
+import com.sparta.selecthing.Main.MainService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

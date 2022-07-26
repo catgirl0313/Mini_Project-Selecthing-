@@ -1,7 +1,10 @@
-package com.sparta.selecthing.comment;
+package com.sparta.selecthing.service;
 
-import com.sparta.selecthing.board.Board;
-import com.sparta.selecthing.board.BoardRepository;
+import com.sparta.selecthing.model.Board;
+import com.sparta.selecthing.model.Comment;
+import com.sparta.selecthing.repository.BoardRepository;
+import com.sparta.selecthing.dto.CommentSaveRequestDto;
+import com.sparta.selecthing.repository.CommentRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -1,37 +1,43 @@
 package com.sparta.selecthing.model;
 
-import lombok.Getter;
+import com.sparta.selecthing.model.Timestamped;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 
-@Setter
-@Getter // get 함수를 일괄적으로 만들어줍니다.
-@NoArgsConstructor // 기본 생성자를 만들어줍니다.
-@Entity // DB 테이블 역할을 합니다.
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
+@Entity
 public class Member extends Timestamped {
-    // ID가 자동으로 생성 및 증가합니다.
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
+    @Id  //ID 할당 방법 1.직접 넣는 방식 (Setter, 생성자) 2.(JPA나)DB에게 할당 책임을 전가. (@GenerateValue)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // mysql 은 identity. auto는 안 맞을 경우도 있어.
     private Long id;
 
-    // 반드시 값을 가지도록 합니다.
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String username;
-
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
-    private String nickName;
+    @Column(nullable = false, unique = true)
+    private String nickname;
 
     @Column
     private String mbti;
 
-    public Member(String username, String password, String nickName) {
+    //@ColumnDfalt("'user'")
+    //private String role; Enum - admin, user, manager 역할 입력해보기
+
+    public Member(String username, String password, String nickname) {
         this.username = username;
         this.password = password;
-        this.nickName = nickName;
+        this.nickname = nickname;
     }
+
 }

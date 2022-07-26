@@ -1,9 +1,13 @@
-package com.sparta.selecthing.board;
+package com.sparta.selecthing.service;
 
-import com.sparta.selecthing.comment.CommentRepository;
-import com.sparta.selecthing.comment.CommentResponseDto;
-import com.sparta.selecthing.member.MemberRepository;
-import com.sparta.selecthing.member.Member;
+import com.sparta.selecthing.repository.CommentRepository;
+import com.sparta.selecthing.dto.BoardDto;
+import com.sparta.selecthing.dto.BoardRequestDto;
+import com.sparta.selecthing.dto.CommentResponseDto;
+import com.sparta.selecthing.model.Board;
+import com.sparta.selecthing.repository.MemberRepository;
+import com.sparta.selecthing.model.Member;
+import com.sparta.selecthing.repository.BoardRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

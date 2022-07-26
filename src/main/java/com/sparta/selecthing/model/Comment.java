@@ -1,12 +1,11 @@
-package com.sparta.selecthing.comment;
+package com.sparta.selecthing.model;
 
-import com.sparta.selecthing.member.Member;
-import com.sparta.selecthing.board.Board;
+import com.sparta.selecthing.model.Member;
+import com.sparta.selecthing.model.Board;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;

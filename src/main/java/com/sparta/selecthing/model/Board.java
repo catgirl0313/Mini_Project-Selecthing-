@@ -1,8 +1,7 @@
-package com.sparta.selecthing.board;
+package com.sparta.selecthing.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.sparta.selecthing.comment.Comment;
-import com.sparta.selecthing.member.*;
+import com.sparta.selecthing.dto.BoardRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

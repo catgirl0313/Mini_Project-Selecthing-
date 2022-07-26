@@ -1,7 +1,6 @@
 package com.sparta.selecthing.Main;
 
-import com.sparta.selecthing.board.BoardRequestDto;
-import com.sparta.selecthing.member.Member;
+import com.sparta.selecthing.model.Member;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

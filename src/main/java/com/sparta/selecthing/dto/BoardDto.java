@@ -1,8 +1,7 @@
-package com.sparta.selecthing.board;
+package com.sparta.selecthing.dto;
 
 
-import com.sparta.selecthing.comment.CommentResponseDto;
-import com.sparta.selecthing.member.Member;
+import com.sparta.selecthing.model.Board;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

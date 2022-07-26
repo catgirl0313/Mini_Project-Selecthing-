@@ -99,7 +99,7 @@ public class UserService {
 
         // 닉네임 중복 체크
     public boolean userNicNameCheck(LoginIdCheckDto loginIdCheckDto) {
-        Optional<Member> found = userRepository.findByNickName(loginIdCheckDto.getNicName());
+        Optional<Member> found = userRepository.findByNickname(loginIdCheckDto.getNicName());
         if (found.isPresent()) {
             return true;
         }else{

@@ -1,4 +1,4 @@
-package com.sparta.selecthing.board;
+package com.sparta.selecthing.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

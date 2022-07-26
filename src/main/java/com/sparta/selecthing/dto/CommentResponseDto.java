@@ -1,5 +1,6 @@
-package com.sparta.selecthing.comment;
+package com.sparta.selecthing.dto;
 
+import com.sparta.selecthing.model.Comment;
 import lombok.Data;
 
 @Data

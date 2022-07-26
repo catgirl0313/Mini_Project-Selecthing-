@@ -1,7 +1,7 @@
 package com.sparta.selecthing.Main;
 
-import com.sparta.selecthing.board.Board;
-import com.sparta.selecthing.board.BoardRepository;
+import com.sparta.selecthing.model.Board;
+import com.sparta.selecthing.repository.BoardRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
