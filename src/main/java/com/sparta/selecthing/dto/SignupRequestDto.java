@@ -7,7 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 public class SignupRequestDto {
     private String username;
-    private String nickName;
+    private String nickname;
     private String password;
     private String password2;
 

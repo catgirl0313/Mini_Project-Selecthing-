@@ -1,6 +1,5 @@
 package com.sparta.selecthing.model;
 
-import com.sparta.selecthing.model.Timestamped;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

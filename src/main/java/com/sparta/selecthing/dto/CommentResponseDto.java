@@ -11,7 +11,7 @@ public class CommentResponseDto {
 
     private String content;
 
-    private String nickName;
+    private String nickname;
 
     private String mbti;
 
@@ -21,7 +21,7 @@ public class CommentResponseDto {
     public CommentResponseDto(Comment comment) {
         this.id = comment.getId();
         this.content = comment.getContent();
-        this.nickName = comment.getMember().getNickname();
+        this.nickname = comment.getMember().getNickname();
         this.mbti = comment.getMember().getMbti();
 
     }

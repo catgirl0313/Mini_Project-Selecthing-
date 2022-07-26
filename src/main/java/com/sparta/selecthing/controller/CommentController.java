@@ -1,10 +1,12 @@
 package com.sparta.selecthing.controller;
 
+import com.sparta.selecthing.security.UserDetailsImpl;
 import com.sparta.selecthing.service.CommentService;
 import com.sparta.selecthing.dto.CommentResponseDto;
 import com.sparta.selecthing.dto.CommentSaveRequestDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -26,7 +28,9 @@ public class CommentController {
     //댓글 작성
     @PostMapping("/boards/{id}/comments") //@AuthenticationPrincipal principalDetail principalDetail
     public ResponseEntity<CommentResponseDto> writeComment(
-            @PathVariable Long id, @RequestBody CommentSaveRequestDto commentSaveRequestDto){
+            @PathVariable Long id,
+            @RequestBody CommentSaveRequestDto commentSaveRequestDto,
+            @AuthenticationPrincipal UserDetailsImpl userDetails){
 //        String nickname = userDtails.getNickname();
 //        commentSaveRequestDto.setNickname(userDtails.getMember().getNickname());
         commentService.writeComment(id, commentSaveRequestDto);
