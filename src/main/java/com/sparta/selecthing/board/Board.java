@@ -35,10 +35,10 @@ public class Board {
     @Column //@Lob : 대용량 데이터
     private String content;
 
-    private String image; //??
+    private String image; //url
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "Member_id")
     private Member member; //DB는 객체를 저장할 수 없음. java는 가능.
 
     @OneToMany(mappedBy = "board", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE) //mappedBy 연관관계의 주인이 아니다(나는 FK가 아니에요) DB에 컬럼 만들지 마세요.
@@ -66,13 +66,10 @@ public class Board {
     @Column(insertable = false)
     private String updatedBy;
 
-
-
-
-//    public Board(String title, String writer, String content) {
-//        this.title = title;
-//        this.writer = writer;
-//        this.content = content;
-//    }
-
+    public Board(BoardRequestDto boardRequestDto, Member member_temp) {
+        this.title = boardRequestDto.getTitle();
+        this.content = boardRequestDto.getContent();
+        this.image = boardRequestDto.getImage();
+        this.member = member_temp;
+    }
 }
