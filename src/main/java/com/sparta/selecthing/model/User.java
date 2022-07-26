@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Entity // DB 테이블 역할을 합니다.
 public class User extends Timestamped {
     // ID가 자동으로 생성 및 증가합니다.
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
 
@@ -25,6 +25,9 @@ public class User extends Timestamped {
 
     @Column(nullable = false)
     private String nickName;
+
+    @Column(nullable = false)
+    private String mbti;
 
     public User(String username, String password, String nickName) {
         this.username = username;

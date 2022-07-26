@@ -1,6 +1,8 @@
 package com.sparta.selecthing.service;
 
 
+import com.sparta.selecthing.dto.LoginIdCheckDto;
+import com.sparta.selecthing.dto.LoginNicnameCheckDto;
 import com.sparta.selecthing.dto.LoginRequestDto;
 import com.sparta.selecthing.dto.SignupRequestDto;
 import com.sparta.selecthing.jwt.JwtTokenProvider;
@@ -23,6 +25,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final AuthenticationManager authenticationManager;
     private static final String ADMIN_TOKEN = "AAABnv/xRVklrnYxKZ0aHgTBcXukeZygoC";
+
 
     // 로그인
     public Boolean login(LoginRequestDto loginRequestDto){
@@ -85,4 +88,23 @@ public class UserService {
         return "logout";
     }
 
+        // 아이디 중복 체크
+    public Boolean userIdCheck(LoginIdCheckDto loginIdCheckDto) {
+        Optional<User> found = userRepository.findByUsername(loginIdCheckDto.getUsername());
+        if (found.isPresent()) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+        // 닉네임 중복 체크
+    public boolean userNicNameCheck(LoginNicnameCheckDto nicnameCheckDto) {
+        Optional<User> found = userRepository.findByUsername(nicnameCheckDto.getNicName());
+        if (found.isPresent()) {
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

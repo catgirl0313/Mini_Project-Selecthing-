@@ -74,7 +74,19 @@ public class JwtTokenProvider {
         }
     }
 
+    //토큰 시간 만료 시키기
     public boolean invalidateToken(String jwtToken) {
-        return true;
+        try{
+            Jws<Claims> claims = Jwts.parser()
+                    .setSigningKey(secretKey)
+                    .parseClaimsJws(jwtToken);
+            Date now = new Date();
+                    claims
+                    .getBody()
+                    .setExpiration(new Date(now.getTime() - (1000L * 60 * 30)));
+        } catch (Exception e) {
+            return false;
+        }
+        return false;
     }
 }

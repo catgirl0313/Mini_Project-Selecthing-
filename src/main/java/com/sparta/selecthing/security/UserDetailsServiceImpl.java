@@ -1,4 +1,4 @@
-package com.sparta.selecthing.security.security;
+package com.sparta.selecthing.security;
 
 
 import com.sparta.selecthing.model.User;
