@@ -2,11 +2,10 @@ package com.sparta.selecthing.service;
 
 
 import com.sparta.selecthing.dto.LoginIdCheckDto;
-import com.sparta.selecthing.dto.LoginNicnameCheckDto;
 import com.sparta.selecthing.dto.LoginRequestDto;
 import com.sparta.selecthing.dto.SignupRequestDto;
 import com.sparta.selecthing.jwt.JwtTokenProvider;
-import com.sparta.selecthing.model.User;
+import com.sparta.selecthing.model.Member;
 import com.sparta.selecthing.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -29,10 +28,10 @@ public class UserService {
 
     // 로그인
     public Boolean login(LoginRequestDto loginRequestDto){
-        User user = userRepository.findByUsername(loginRequestDto.getUsername())
+        Member member = userRepository.findByUsername(loginRequestDto.getUsername())
                 .orElse(null);
-        if (user != null) {
-            if (!passwordEncoder.matches(loginRequestDto.getPassword(), user.getPassword())) {
+        if (member != null) {
+            if (!passwordEncoder.matches(loginRequestDto.getPassword(), member.getPassword())) {
                 return false;
             }
         } else {
@@ -51,7 +50,7 @@ public class UserService {
         String pattern = "^[a-zA-Z0-9]*$";
 
         // 회원 ID 중복 확인
-        Optional<User> found = userRepository.findByUsername(username);
+        Optional<Member> found = userRepository.findByUsername(username);
         if (found.isPresent()) {
             return "중복된 id 입니다.";
         }
@@ -74,8 +73,8 @@ public class UserService {
         requestDto.setPassword(password);
 
         // 유저 정보 저장
-        User user = new User(username, password, nickName);
-        userRepository.save(user);
+        Member member = new Member(username, password, nickName);
+        userRepository.save(member);
         return error;
     }
 
@@ -90,7 +89,7 @@ public class UserService {
 
         // 아이디 중복 체크
     public Boolean userIdCheck(LoginIdCheckDto loginIdCheckDto) {
-        Optional<User> found = userRepository.findByUsername(loginIdCheckDto.getUsername());
+        Optional<Member> found = userRepository.findByUsername(loginIdCheckDto.getUsername());
         if (found.isPresent()) {
             return true;
         }else{
@@ -99,8 +98,8 @@ public class UserService {
     }
 
         // 닉네임 중복 체크
-    public boolean userNicNameCheck(LoginNicnameCheckDto nicnameCheckDto) {
-        Optional<User> found = userRepository.findByUsername(nicnameCheckDto.getNicName());
+    public boolean userNicNameCheck(LoginIdCheckDto loginIdCheckDto) {
+        Optional<Member> found = userRepository.findByNickName(loginIdCheckDto.getNicName());
         if (found.isPresent()) {
             return true;
         }else{

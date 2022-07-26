@@ -1,7 +1,6 @@
 package com.sparta.selecthing.controller;
 
 import com.sparta.selecthing.dto.LoginIdCheckDto;
-import com.sparta.selecthing.dto.LoginNicnameCheckDto;
 import com.sparta.selecthing.dto.LoginRequestDto;
 import com.sparta.selecthing.dto.SignupRequestDto;
 import com.sparta.selecthing.jwt.JwtTokenProvider;
@@ -70,14 +69,14 @@ public class UserController {
     }
 
     //닉네임 중복 체크
-    @GetMapping("user/login/userIds")
-    public Boolean nicNAmeCheck(@RequestBody LoginNicnameCheckDto nicnameCheckDto){
-        return userService.userNicNameCheck(nicnameCheckDto);
+    @GetMapping("user/login/nickNames")
+    public Boolean nicNAmeCheck(@RequestBody LoginIdCheckDto loginIdCheckDto){
+        return userService.userNicNameCheck(loginIdCheckDto);
     }
 
     //로그인 유저 정보
     @GetMapping("user/login/auth")
-    public String userDetails(@AuthenticationPrincipal UserDetailsImpl userDetails){
+    public String userDetails(@AuthenticationPrincipal UserDetailsImpl userDetails) {
         return userDetails.getUsername();
     }
 }

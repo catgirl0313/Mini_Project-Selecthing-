@@ -7,4 +7,5 @@ import lombok.*;
 @NoArgsConstructor
 public class LoginIdCheckDto {
     private String username;
+    private String nicName;
 }
