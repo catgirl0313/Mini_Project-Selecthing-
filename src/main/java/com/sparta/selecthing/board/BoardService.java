@@ -35,7 +35,7 @@ public class BoardService {
        Member member_temp = memberRepository.findById(memberId)
                .orElseThrow(() -> new IllegalArgumentException("id 오류"));
 
-        Board board = new Board(boardRequestDto, member_temp).;
+        Board board = new Board(boardRequestDto, member_temp);
 
         boardRepository.save(board);
 
