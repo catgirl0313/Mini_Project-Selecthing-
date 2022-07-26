@@ -39,7 +39,7 @@ public class BoardService {
 
         boardRepository.save(board);
 
-        return "ok";
+        return "200 ok";
     }
 
     @Transactional
