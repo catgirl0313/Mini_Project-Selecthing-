@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 @RestController
 //@RestController
 public class BoardController {
@@ -33,7 +32,7 @@ public class BoardController {
     public String board(@RequestBody BoardRequestDto boardRequestDto,
                        @PathVariable Long id){
         Long memberId = id;
-        Board board = boardService.createBoard(boardRequestDto, memberId);
+        String board = boardService.createBoard(boardRequestDto, memberId);
 
         return "200 ok";
     }
@@ -50,40 +49,4 @@ public class BoardController {
         boardService.deleteBoard(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-    //댓글 작성
-    @PostMapping("/board/{id}/comment") //@AuthenticationPrincipal principalDetail principalDetail
-    public ResponseEntity<CommentResponseDto> writeComment(
-            @PathVariable Long id, @RequestBody CommentSaveRequestDto commentSaveRequestDto){
-        boardService.writeComment(commentSaveRequestDto);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-    //댓글 삭제
-    @DeleteMapping("/board/{id}/comment/{commentId}")
-    public ResponseEntity<BoardDto> deleteComment(@PathVariable Long commentId){
-        boardService.deleteComment(commentId);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-
-
-//    @PostMapping("/board")
-//    public ResponseEntity<Board> save(@RequestBody Board board){
-//        boardService.writeBoard(board);
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
-
-//    @PostMapping("/board/{id}/comment") //@AuthenticationPrincipal principalDetail principalDetail
-//    public ResponseEntity<CommentResponseDto> commentSave(
-//            @PathVariable id, @RequestBody Comment comment){
-//        boardService.writeComment(user, boardId, comment);
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
-
-
-    //dto/?
-
-
-
-
 }
