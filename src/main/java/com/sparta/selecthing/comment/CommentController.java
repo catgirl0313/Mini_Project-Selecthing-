@@ -24,13 +24,14 @@ public class CommentController {
 //    }
 
     //댓글 작성
-    @PostMapping("/board/{boardId}/comments") //@AuthenticationPrincipal principalDetail principalDetail
+    @PostMapping("/boards/{id}/comments") //@AuthenticationPrincipal principalDetail principalDetail
     public ResponseEntity<CommentResponseDto> writeComment(
-            @PathVariable Long boardId, @RequestBody CommentSaveRequestDto commentSaveRequestDto){
-        commentSaveRequestDto.setUsername(userDtails.getMember().getNickname());
-        commentService.writeComment(commentSaveRequestDto);
-        return new ResponseEntity.status(HttpStatus.OK)
-                .body("성공!");
+            @PathVariable Long id, @RequestBody CommentSaveRequestDto commentSaveRequestDto){
+//        String nickname = userDtails.getNickname();
+//        commentSaveRequestDto.setNickname(userDtails.getMember().getNickname());
+        commentService.writeComment(id, commentSaveRequestDto);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(null);
     }
     //댓글 삭제
 //    @DeleteMapping("/board/{boardId}/comments")
