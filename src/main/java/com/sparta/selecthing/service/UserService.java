@@ -96,12 +96,14 @@ public class UserService {
         Optional<Member> found = userRepository.findByUsername(loginIdCheckDto.getUsername());
         if (found.isPresent()) {
             return "중복된 아이디 입니다.";
-        }return "사용 할 수 있는 아이디 입니다.";
+        }else{
+            return "사용 할 수 있는 아이디 입니다.";
+        }
     }
 
         // 닉네임 중복 체크
     public String userNicNameCheck(LoginIdCheckDto loginIdCheckDto) {
-        Optional<Member> found = userRepository.findByNickname(loginIdCheckDto.getNicName());
+        Optional<Member> found = userRepository.findByNickname(loginIdCheckDto.getNickname());
         if (found.isPresent()) {
             return "중복된 닉네임 입니다.";
         }else{
