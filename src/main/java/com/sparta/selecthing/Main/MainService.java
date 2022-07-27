@@ -23,7 +23,9 @@ public class MainService {
         List<MainResponseDto> mainResponseDtoList = new ArrayList<>();
         for(Board temp : boardAll)
         {
-            MainResponseDto mainResponseDtoTemp = new MainResponseDto(temp.getTitle(),temp.getImage(),temp.getContent(),temp.getMember());
+            MainResponseDto mainResponseDtoTemp = new MainResponseDto(temp.getId(),
+                    temp.getTitle(),temp.getImage(),temp.getContent(),
+                    temp.getMember(),temp.getMbti());
             mainResponseDtoList.add(mainResponseDtoTemp);
         }
 

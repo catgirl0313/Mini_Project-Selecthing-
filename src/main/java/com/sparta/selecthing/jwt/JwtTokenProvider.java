@@ -1,11 +1,16 @@
 package com.sparta.selecthing.jwt;
 
+import com.sparta.selecthing.model.Member;
+import com.sparta.selecthing.repository.UserRepository;
+import com.sparta.selecthing.security.UserDetailsImpl;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.expression.spel.ast.NullLiteral;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,6 +19,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.constraints.Null;
 import java.util.Base64;
 import java.util.Date;
 
@@ -29,6 +35,8 @@ public class JwtTokenProvider {
     private static final long TOKEN_VALID_TIME = 1000L * 60 * 5;
 
     private final UserDetailsService userDetailsService;
+
+    private final UserRepository userRepository;
 
     // 객체 초기화, secretKey 를 Base64로 인코딩한다.
     @PostConstruct
@@ -50,8 +58,17 @@ public class JwtTokenProvider {
 
     // JWT 토큰에서 인증 정보 조회
     public Authentication getAuthentication(String token) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(this.getUserPk(token));
-        return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
+        Member member = userRepository.findByNickname(this.getUserPk(token))
+                .orElseThrow(()-> new NullPointerException("Null is username"));
+
+        UserDetailsImpl userDetails = new UserDetailsImpl(member);
+
+      /* UserDetails userDetails =userDetailsService.loadUserByUsername();
+        Member member = userRepository.findByUsername(userDetails.getUsername())
+                .orElseThrow(()-> new NullPointerException("Null is username"));
+        UserDetailsImpl userdetailsimpl = new UserDetailsImpl(member);
+        */
+        return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
     }
 
     // 토큰에서 회원 정보 추출

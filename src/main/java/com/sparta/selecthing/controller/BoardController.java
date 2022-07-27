@@ -1,6 +1,7 @@
 package com.sparta.selecthing.controller;
 
 
+import com.sparta.selecthing.model.Member;
 import com.sparta.selecthing.security.UserDetailsImpl;
 import com.sparta.selecthing.service.BoardService;
 import com.sparta.selecthing.dto.BoardDto;
@@ -28,10 +29,12 @@ public class BoardController {
 
     //게시글 작성
     @PostMapping("/newBoards") //@AuthenticationPrincipal principalDetail principalDetail
-    public String board(@RequestBody BoardRequestDto boardRequestDto,
-                       @AuthenticationPrincipal UserDetailsImpl userDetails){
-        Long memberId = userDetails.getMember().getId();
-        String board = boardService.createBoard(boardRequestDto, memberId);
+    public String board(@RequestBody BoardRequestDto boardRequestDto){
+                       // @AuthenticationPrincipal UserDetailsImpl userDetails){
+
+       // Long memberId = userDetails.getMember().getId();
+
+        String board = boardService.createBoard(boardRequestDto, 1L);
 
         return "200 ok";
     }
@@ -52,14 +55,13 @@ public class BoardController {
 //        model.addAttribute("board", boardService.showDetailedBoard(id));
         return boardService.showDetailedBoard(boardId);
     }
+
     //상세 게시글 삭제
     @DeleteMapping("/boards/{boardId}/details")
     public ResponseEntity<BoardDto> deleteBoard(@PathVariable Long boardId) {
         boardService.deleteBoard(boardId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-
 
 //    @PostMapping("/board")
 //    public ResponseEntity<Board> save(@RequestBody Board board){
@@ -73,11 +75,4 @@ public class BoardController {
 //        boardService.writeComment(user, boardId, comment);
 //        return new ResponseEntity<>(HttpStatus.OK);
 //    }
-
-
-    //dto/?
-
-
-
-
 }

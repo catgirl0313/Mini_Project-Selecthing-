@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.dialect.TypeNames;
+import org.hibernate.query.criteria.internal.expression.function.AggregationFunction;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -13,6 +15,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -34,7 +37,11 @@ public class Board {
     @Column //@Lob : 대용량 데이터
     private String content;
 
+    @Column(length = 65535)
     private String image; //url제대로 되라.
+
+    @Column
+    private String mbti;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "member_id")
@@ -45,14 +52,12 @@ public class Board {
     @OrderBy("id desc")
     private List<Comment> comments;
 
-
-
-
-
+    //작성일자.
     @CreatedDate
     @Column(updatable = false)
     private LocalDateTime createdAt;
 
+    //누가 작성했는가?
     @CreatedBy
     @Column(updatable = false)
     private String createdBy;
@@ -70,5 +75,6 @@ public class Board {
         this.content = boardRequestDto.getContent();
         this.image = boardRequestDto.getImage();
         this.member = member_temp;
+        this.mbti = boardRequestDto.getMbti();
     }
 }
