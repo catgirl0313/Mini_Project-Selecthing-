@@ -55,7 +55,7 @@ public class Board {
     //작성일자.
     @CreatedDate
     @Column(updatable = false)
-    private LocalDateTime createdAt;
+    private String createdAt;
 
     //누가 작성했는가?
     @CreatedBy
@@ -70,11 +70,12 @@ public class Board {
     @Column(insertable = false)
     private String updatedBy;
 
-    public Board(BoardRequestDto boardRequestDto, Member member_temp) {
+    public Board(BoardRequestDto boardRequestDto, Member member_temp, String createdAt) {
         this.title = boardRequestDto.getTitle();
         this.content = boardRequestDto.getContent();
         this.image = boardRequestDto.getImage();
         this.member = member_temp;
         this.mbti = boardRequestDto.getMbti();
+        this.createdAt = createdAt;
     }
 }

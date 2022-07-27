@@ -8,6 +8,11 @@ import com.sparta.selecthing.repository.CommentRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+
 @Service
 public class CommentService {
     private final CommentRepository commentRepository;
@@ -36,7 +41,15 @@ public class CommentService {
         );
         String content = commentSaveRequestDto.getContent();
 
-        Comment writeComment = new Comment(board, content);
+        ZoneId utcZone = ZoneId.of("UTC");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime dateTime = LocalDateTime.now();
+        ZonedDateTime utcDateTime = dateTime.atZone(utcZone);
+
+        ZonedDateTime zdt = utcDateTime.withZoneSameInstant(ZoneId.of("Asia/Seoul"));
+        String kstDateTime = zdt.format(formatter);
+
+        Comment writeComment = new Comment(board, content,kstDateTime);
 
         commentRepository.save(writeComment);
     }

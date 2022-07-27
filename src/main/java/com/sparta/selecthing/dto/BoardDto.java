@@ -22,7 +22,7 @@ public class BoardDto {
     private String content;
     private String image;
 
-    private LocalDateTime createdAt;
+    private String createdAt;
 
     private boolean agree = false;
     private boolean disagree = false;

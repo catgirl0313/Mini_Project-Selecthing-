@@ -11,6 +11,10 @@ import com.sparta.selecthing.repository.BoardRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -37,10 +41,15 @@ public class BoardService {
     //게시글 등록
     @Transactional
     public String createBoard(BoardRequestDto boardRequestDto, Long memberId) {
-       Member member_temp = memberRepository.findById(memberId)
-               .orElseThrow(() -> new IllegalArgumentException("id 오류"));
+        Member member_temp = memberRepository.findById(memberId)
+                .orElseThrow(() -> new IllegalArgumentException("id 오류"));
 
-        Board board = new Board(boardRequestDto, member_temp);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime dateTime1 = LocalDateTime.now(ZoneId.of("America/Los_Angeles"));
+        String DateTime = ZonedDateTime.now(ZoneId.of("Asia/Seoul")).format(formatter);
+
+
+        Board board = new Board(boardRequestDto, member_temp, DateTime);
 
         boardRepository.save(board);
 

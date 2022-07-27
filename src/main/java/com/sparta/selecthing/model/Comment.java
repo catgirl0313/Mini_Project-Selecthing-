@@ -40,7 +40,7 @@ public class Comment {
 
     @CreatedDate
     @Column(updatable = false)
-    private LocalDateTime createdAt;
+    private String createdAt;
 
     //누구에게 작성됬는가? => nickname or username
     @CreatedBy
@@ -55,9 +55,10 @@ public class Comment {
     @Column(insertable = false)
     private String updatedBy;
 
-    public Comment(Board board, String content) {
+    public Comment(Board board, String content,String createdAt) {
         this.board = board;
         this.content = content;
+        this.createdAt = createdAt;
     }
 
 }
