@@ -2,12 +2,8 @@ package com.sparta.selecthing.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sparta.selecthing.dto.BoardRequestDto;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.dialect.TypeNames;
-import org.hibernate.query.criteria.internal.expression.function.AggregationFunction;
+import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -69,6 +65,22 @@ public class Board {
     @LastModifiedBy
     @Column(insertable = false)
     private String updatedBy;
+
+    @Column
+    @ColumnDefault("0")
+    private int agreeCount;
+
+    @Column
+    @ColumnDefault("0")
+    private int disagreeCount;
+
+    @Column(nullable = false)
+    @ColumnDefault("false")
+    private boolean agree;
+
+    @Column(nullable = false)
+    @ColumnDefault("false")
+    private boolean disagree;
 
     public Board(BoardRequestDto boardRequestDto, Member member_temp, String createdAt) {
         this.title = boardRequestDto.getTitle();

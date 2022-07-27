@@ -1,6 +1,8 @@
 package com.sparta.selecthing.controller;
 
 
+import com.sparta.selecthing.dto.BoardYesandNoDto;
+import com.sparta.selecthing.model.Board;
 import com.sparta.selecthing.model.Member;
 import com.sparta.selecthing.security.UserDetailsImpl;
 import com.sparta.selecthing.service.BoardService;
@@ -52,8 +54,14 @@ public class BoardController {
     //상세 게시글 열람
     @GetMapping("/boards/{boardId}/details")
     public BoardDto showDetailedBoard(@PathVariable Long boardId) {
-//        model.addAttribute("board", boardService.showDetailedBoard(id));
         return boardService.showDetailedBoard(boardId);
+    }
+
+    //찬반 count 변경
+    @PatchMapping("/boards/{boardId}/details")
+    public HttpStatus patchDetailsBoard(@PathVariable Long boardId, @RequestBody BoardYesandNoDto boardYenandNoDto)
+    {
+        return boardService.patchDetailsBoard(boardId,boardYenandNoDto);
     }
 
     //상세 게시글 삭제

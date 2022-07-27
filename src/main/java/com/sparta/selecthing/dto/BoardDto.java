@@ -24,11 +24,12 @@ public class BoardDto {
 
     private String createdAt;
 
-    private boolean agree = false;
-    private boolean disagree = false;
-    private int agreeCount = 0;
-    private int disagreeCount = 0;
+    private int agreeCount;
+    private int disagreeCount;
 
+    private boolean agree;
+
+    private boolean disagree;
 //    private Board board;
 
     private List<CommentResponseDto> comments;
@@ -41,9 +42,12 @@ public class BoardDto {
         this.mbti = board.getMbti();
         this.content = board.getContent();
         this.image = board.getImage();
+         this.createdAt = board.getCreatedAt();
+        this.comments = comments;
+
+        this.agree = board.isAgree();
+        this.disagree = board.isDisagree();
         this.agreeCount = getAgreeCount();
         this.disagreeCount = getDisagreeCount();
-        this.createdAt = board.getCreatedAt();
-        this.comments = comments;
     }
 }

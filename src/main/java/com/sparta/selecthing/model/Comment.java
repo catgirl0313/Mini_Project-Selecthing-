@@ -1,11 +1,9 @@
 package com.sparta.selecthing.model;
 
+import com.sparta.selecthing.dto.CommentSaveRequestDto;
 import com.sparta.selecthing.model.Member;
 import com.sparta.selecthing.model.Board;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -19,7 +17,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-@Data
+@Getter
+@Setter
+//@ToString(exclude = "board")
 @Entity
 public class Comment {
 
@@ -29,6 +29,9 @@ public class Comment {
 
     @Column(nullable = false)
     private String content;
+
+    @Column(nullable = false)
+    private String mbtiComment;
 
     @ManyToOne
     @JoinColumn(name = "Member_id")
@@ -55,10 +58,12 @@ public class Comment {
     @Column(insertable = false)
     private String updatedBy;
 
-    public Comment(Board board, String content,String createdAt) {
+    public Comment(Board board, CommentSaveRequestDto commentSaveRequestDto, String createdAt) {
         this.board = board;
-        this.content = content;
+        this.content = commentSaveRequestDto.getContent();
         this.createdAt = createdAt;
+        this.member = board.getMember();
+        this.mbtiComment = commentSaveRequestDto.getMbit();
     }
 
 }

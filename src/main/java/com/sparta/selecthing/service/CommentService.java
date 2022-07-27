@@ -39,17 +39,12 @@ public class CommentService {
         Board board = boardRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("게시글을 찾을 수 없습니다.")
         );
-        String content = commentSaveRequestDto.getContent();
+    //    String content = commentSaveRequestDto.getContent();
 
-        ZoneId utcZone = ZoneId.of("UTC");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime dateTime = LocalDateTime.now();
-        ZonedDateTime utcDateTime = dateTime.atZone(utcZone);
+        String DateTime = ZonedDateTime.now(ZoneId.of("Asia/Seoul")).format(formatter);
 
-        ZonedDateTime zdt = utcDateTime.withZoneSameInstant(ZoneId.of("Asia/Seoul"));
-        String kstDateTime = zdt.format(formatter);
-
-        Comment writeComment = new Comment(board, content,kstDateTime);
+        Comment writeComment = new Comment(board, commentSaveRequestDto,DateTime);
 
         commentRepository.save(writeComment);
     }
