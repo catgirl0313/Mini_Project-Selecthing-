@@ -1,11 +1,13 @@
 package com.sparta.selecthing.controller;
 
 
+import com.sparta.selecthing.security.UserDetailsImpl;
 import com.sparta.selecthing.service.BoardService;
 import com.sparta.selecthing.dto.BoardDto;
 import com.sparta.selecthing.dto.BoardRequestDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,15 +26,15 @@ public class BoardController {
     }
 
     //게시글 작성
-/*    @PostMapping("/newBoards") //@AuthenticationPrincipal principalDetail principalDetail
+    @PostMapping("/newBoards") //@AuthenticationPrincipal principalDetail principalDetail
     public String board(@RequestBody BoardRequestDto boardRequestDto,
                        @AuthenticationPrincipal UserDetailsImpl userDetails){
         Long memberId = userDetails.getMember().getId();
-        Board board = boardService.createBoard(boardRequestDto, memberId);
+        String board = boardService.createBoard(boardRequestDto, memberId);
 
         return "200 ok";
     }
-*/
+/*
     //실험용.
     @PostMapping("/newBoards/{id}") //@AuthenticationPrincipal principalDetail principalDetail
     public String board(@RequestBody BoardRequestDto boardRequestDto,
@@ -42,7 +44,7 @@ public class BoardController {
 
         return "200 ok";
     }
-
+*/
     //상세 게시글 열람
     @GetMapping("/boards/{boardId}/details")
     public BoardDto showDetailedBoard(@PathVariable Long boardId) {
