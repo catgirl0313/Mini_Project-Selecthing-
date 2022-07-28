@@ -16,7 +16,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
     @Autowired
     private UserRepository userRepository;
 
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetailsImpl loadUserByUsername(String username) throws UsernameNotFoundException {
         Member member = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Can't find " + username));
 

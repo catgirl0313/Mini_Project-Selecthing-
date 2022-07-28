@@ -1,9 +1,6 @@
 package com.sparta.selecthing.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -23,7 +20,6 @@ public class Member extends Timestamped {
     private String username;
     @Column(nullable = false)
     private String password;
-
     @Column(nullable = false, unique = true)
     private String nickname;
 
@@ -39,4 +35,9 @@ public class Member extends Timestamped {
         this.nickname = nickname;
     }
 
+
+    public Member(String username, String usernickname) {
+        this.username = username;
+        this.nickname = usernickname;
+    }
 }

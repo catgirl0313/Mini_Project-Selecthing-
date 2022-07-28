@@ -1,7 +1,8 @@
 package com.sparta.selecthing.security;
 
-import com.sparta.selecthing.jwt.JwtAuthenticationFilter;
-import com.sparta.selecthing.jwt.JwtTokenProvider;
+import com.sparta.selecthing.jwt.FormLoginFilter;
+import com.sparta.selecthing.jwt.JwtAuthorizationFilter;
+import com.sparta.selecthing.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -15,9 +16,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @EnableWebSecurity // 스프링 Security 지원을 가능하게 함
@@ -25,7 +23,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @RequiredArgsConstructor
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final JwtTokenProvider jwtTokenProvider;
+    private final UserRepository userRepository;
 
     @Bean   // 비밀번호 암호화
     public BCryptPasswordEncoder encodePassword() {
@@ -54,11 +52,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/**").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("**").permitAll()
-                .antMatchers("/").permitAll()
+                .antMatchers("/").authenticated()
 //                .antMatchers(HttpMethod.GET,"/api/contents").permitAll()
 //                .antMatchers(HttpMethod.GET, "/api/reply/**").permitAll()
 
-                // 그 외 모든 요청은 인증과정 필요
+                // 그 외 모든 요청허용
                 .anyRequest().permitAll()
                 .and()
 //                .addFilter(corsFilter)
@@ -66,23 +64,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
 
-                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
-    }
-
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-
-        configuration.addAllowedOrigin("http://localhost:3000");
-        configuration.setAllowCredentials(true);
-        configuration.addAllowedMethod("*");
-        configuration.addAllowedHeader("*");
-        configuration.addExposedHeader("Authorization");
-        configuration.addAllowedOriginPattern("*");
-// configuration.addAllowedOrigin("");
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/", configuration);
-        return source;
+                .addFilterBefore(new FormLoginFilter(authenticationManager()), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new JwtAuthorizationFilter(authenticationManager(), userRepository), UsernamePasswordAuthenticationFilter.class)
+                ;
     }
 }

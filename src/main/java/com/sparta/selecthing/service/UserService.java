@@ -4,22 +4,20 @@ package com.sparta.selecthing.service;
 import com.sparta.selecthing.dto.LoginIdCheckDto;
 import com.sparta.selecthing.dto.LoginRequestDto;
 import com.sparta.selecthing.dto.SignupRequestDto;
-import com.sparta.selecthing.jwt.JwtTokenProvider;
 import com.sparta.selecthing.model.Member;
 import com.sparta.selecthing.repository.UserRepository;
+import com.sparta.selecthing.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
-    private final JwtTokenProvider jwtTokenProvider;
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final AuthenticationManager authenticationManager;
@@ -82,14 +80,14 @@ public class UserService {
         return error;
     }
 
-    public String logout(HttpServletRequest request){
-        // jwtTokenProvider 에서 token값을 가져옴
-        String header = jwtTokenProvider.resolveToken(request);
-        // 가져온 token값 파기
-        jwtTokenProvider.invalidateToken(header);
-
-        return "logout";
+    //로그인 유저 정보 반환
+    public Member userInfo(UserDetailsImpl userDetails) {
+        String username = userDetails.getUsername();
+        String usernickname = userDetails.getMember().getNickname();
+        Member userinfo = new Member(username, usernickname);
+        return userinfo;
     }
+
 
         // 아이디 중복 체크
     public String userIdCheck(LoginIdCheckDto loginIdCheckDto) {
