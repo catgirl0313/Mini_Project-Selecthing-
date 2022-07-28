@@ -2,10 +2,8 @@ package com.sparta.selecthing.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sparta.selecthing.dto.BoardRequestDto;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -13,6 +11,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -34,7 +33,11 @@ public class Board {
     @Column //@Lob : 대용량 데이터
     private String content;
 
+    @Column(length = 65535)
     private String image; //url제대로 되라.
+
+    @Column
+    private String mbti;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "member_id")
@@ -45,14 +48,12 @@ public class Board {
     @OrderBy("id desc")
     private List<Comment> comments;
 
-
-
-
-
+    //작성일자.
     @CreatedDate
     @Column(updatable = false)
-    private LocalDateTime createdAt;
+    private String createdAt;
 
+    //누가 작성했는가?
     @CreatedBy
     @Column(updatable = false)
     private String createdBy;
@@ -65,10 +66,28 @@ public class Board {
     @Column(insertable = false)
     private String updatedBy;
 
-    public Board(BoardRequestDto boardRequestDto, Member member_temp) {
+    @Column
+    @ColumnDefault("0")
+    private int agreeCount;
+
+    @Column
+    @ColumnDefault("0")
+    private int disagreeCount;
+
+    @Column(nullable = false)
+    @ColumnDefault("false")
+    private boolean agree;
+
+    @Column(nullable = false)
+    @ColumnDefault("false")
+    private boolean disagree;
+
+    public Board(BoardRequestDto boardRequestDto, Member member_temp, String createdAt) {
         this.title = boardRequestDto.getTitle();
         this.content = boardRequestDto.getContent();
         this.image = boardRequestDto.getImage();
         this.member = member_temp;
+        this.mbti = boardRequestDto.getMbti();
+        this.createdAt = createdAt;
     }
 }

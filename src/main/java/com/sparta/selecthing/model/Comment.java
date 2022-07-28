@@ -1,11 +1,9 @@
 package com.sparta.selecthing.model;
 
+import com.sparta.selecthing.dto.CommentSaveRequestDto;
 import com.sparta.selecthing.model.Member;
 import com.sparta.selecthing.model.Board;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -19,7 +17,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-@Data
+@Getter
+@Setter
+//@ToString(exclude = "board")
 @Entity
 public class Comment {
 
@@ -29,6 +29,9 @@ public class Comment {
 
     @Column(nullable = false)
     private String content;
+
+    @Column(nullable = false)
+    private String mbtiComment;
 
     @ManyToOne
     @JoinColumn(name = "Member_id")
@@ -40,7 +43,7 @@ public class Comment {
 
     @CreatedDate
     @Column(updatable = false)
-    private LocalDateTime createdAt;
+    private String createdAt;
 
     //누구에게 작성됬는가? => nickname or username
     @CreatedBy
@@ -55,9 +58,12 @@ public class Comment {
     @Column(insertable = false)
     private String updatedBy;
 
-    public Comment(Board board, String content) {
+    public Comment(Board board, CommentSaveRequestDto commentSaveRequestDto, String createdAt,Member member) {
         this.board = board;
-        this.content = content;
+        this.member = member;
+        this.createdAt = createdAt;
+        this.content = commentSaveRequestDto.getContent();
+        this.mbtiComment = commentSaveRequestDto.getMbit();
     }
 
 }

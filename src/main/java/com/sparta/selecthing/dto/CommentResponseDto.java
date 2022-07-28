@@ -15,14 +15,11 @@ public class CommentResponseDto {
 
     private String mbti;
 
-    public CommentResponseDto() {
-    }
 
-    public CommentResponseDto(Comment comment) {
-        this.id = comment.getId();
-        this.content = comment.getContent();
-        this.nickname = comment.getMember().getNickname();
-        this.mbti = comment.getMember().getMbti();
-
+    public CommentResponseDto(Long id, String content, String nickname, String mbti) {
+        this.id = id;
+        this.content = content;
+        this.nickname = nickname;
+        this.mbti = mbti;
     }
 }

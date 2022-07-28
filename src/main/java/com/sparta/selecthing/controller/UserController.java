@@ -1,6 +1,5 @@
 package com.sparta.selecthing.controller;
 
-import com.sparta.selecthing.dto.LoginIdCheckDto;
 import com.sparta.selecthing.dto.SignupRequestDto;
 import com.sparta.selecthing.model.Member;
 import com.sparta.selecthing.security.UserDetailsImpl;
@@ -26,18 +25,6 @@ public class UserController {
         } else {
             return res;
         }
-    }
-
-    //아이디 중복 체크
-    @GetMapping("user/login/userIds")
-    public String idCheck(@RequestBody LoginIdCheckDto loginIdCheckDto){
-        return userService.userIdCheck(loginIdCheckDto);
-    }
-
-    //닉네임 중복 체크
-    @GetMapping("user/login/nickNames")
-    public String nicNAmeCheck(@RequestBody LoginIdCheckDto loginIdCheckDto){
-        return userService.userNicNameCheck(loginIdCheckDto);
     }
 
     //로그인 유저 정보

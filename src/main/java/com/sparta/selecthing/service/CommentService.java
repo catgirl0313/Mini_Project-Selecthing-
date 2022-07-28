@@ -2,20 +2,27 @@ package com.sparta.selecthing.service;
 
 import com.sparta.selecthing.model.Board;
 import com.sparta.selecthing.model.Comment;
+import com.sparta.selecthing.model.Member;
 import com.sparta.selecthing.repository.BoardRepository;
 import com.sparta.selecthing.dto.CommentSaveRequestDto;
 import com.sparta.selecthing.repository.CommentRepository;
+import com.sparta.selecthing.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Service
 public class CommentService {
     private final CommentRepository commentRepository;
     private final BoardRepository boardRepository;
-
-    public CommentService(CommentRepository commentRepository, BoardRepository boardRepository) {
+    private final UserRepository userRepository;
+    public CommentService(CommentRepository commentRepository, BoardRepository boardRepository, UserRepository userRepository) {
         this.commentRepository = commentRepository;
         this.boardRepository = boardRepository;
+        this.userRepository = userRepository;
     }
 
 //    //댓글 목록보기
@@ -30,13 +37,17 @@ public class CommentService {
 //
 //    }
     @Transactional
-    public void writeComment(Long id, CommentSaveRequestDto commentSaveRequestDto){
-        Board board = boardRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("게시글을 찾을 수 없습니다.")
-        );
-        String content = commentSaveRequestDto.getContent();
+    public void writeComment(Long id, CommentSaveRequestDto commentSaveRequestDto,Long memberId){
+        Member member = userRepository.findById(memberId).orElseThrow(
+                () -> new IllegalArgumentException("null"));
 
-        Comment writeComment = new Comment(board, content);
+        Board board = boardRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("게시글을 찾을 수 없습니다."));
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String DateTime = ZonedDateTime.now(ZoneId.of("Asia/Seoul")).format(formatter);
+
+        Comment writeComment = new Comment(board, commentSaveRequestDto, DateTime, member);
 
         commentRepository.save(writeComment);
     }
