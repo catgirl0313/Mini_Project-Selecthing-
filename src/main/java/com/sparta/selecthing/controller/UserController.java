@@ -1,16 +1,14 @@
 package com.sparta.selecthing.controller;
 
 import com.sparta.selecthing.dto.LoginIdCheckDto;
-import com.sparta.selecthing.dto.LoginRequestDto;
 import com.sparta.selecthing.dto.SignupRequestDto;
-import com.sparta.selecthing.jwt.JwtTokenProvider;
+import com.sparta.selecthing.model.Member;
 import com.sparta.selecthing.security.UserDetailsImpl;
 import com.sparta.selecthing.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @RestController
@@ -19,29 +17,18 @@ import javax.validation.Valid;
 public class UserController {
 
     private final UserService userService;
-    private final JwtTokenProvider jwtTokenProvider;
-
-    @GetMapping("/user/login")
-    public String login() {
-        return "login";
-    }
-
-    @GetMapping("/user/signup")
-    public String signup() {
-        return "signup";
-    }
 
     // 회원 로그인
-    @PostMapping("/user/login")
-    public String login(@RequestBody LoginRequestDto loginRequestDto) {
-        if (userService.login(loginRequestDto)) {
-            String token = jwtTokenProvider.createToken(loginRequestDto.getUsername());
-            System.out.println(token);
-            return token;
-        } else {
-            return "false";
-        }
-    }
+//    @PostMapping("/user/login")
+//    public String login(@RequestBody LoginRequestDto loginRequestDto) {
+//        if (userService.login(loginRequestDto)) {
+//            String token = jwtTokenProvider.createToken(loginRequestDto.getUsername());
+//            System.out.println(token);
+//            return token;
+//        } else {
+//            return "false";
+//        }
+//    }
 
     // 회원 가입 요청 처리
     @PostMapping("/user/signup")
@@ -54,11 +41,6 @@ public class UserController {
         }
     }
 
-    //로그 아웃
-    @PostMapping("/user/logout")
-    public String logout(HttpServletRequest request){
-        return userService.logout(request);
-    }
 
     //아이디 중복 체크
     @GetMapping("user/login/userIds")
@@ -74,7 +56,7 @@ public class UserController {
 
     //로그인 유저 정보
     @GetMapping("user/login/auth")
-    public String userDetails(@AuthenticationPrincipal UserDetailsImpl userDetails) {
-        return userDetails.getUsername();
+    public Member userDetails(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+       return userService.userInfo(userDetails);
     }
 }
