@@ -3,6 +3,7 @@ package com.sparta.selecthing.controller;
 
 import com.sparta.selecthing.dto.BoardYesandNoDto;
 
+
 import com.sparta.selecthing.exception.CustomExcepton;
 import com.sparta.selecthing.model.Board;
 import com.sparta.selecthing.model.Member;
