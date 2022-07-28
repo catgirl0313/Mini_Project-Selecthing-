@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @NoArgsConstructor
@@ -20,11 +22,14 @@ public class BoardDto {
     private String content;
     private String image;
 
-    private boolean agree = false;
-    private boolean disagree = false;
-    private int agreeCount = 0;
-    private int disagreeCount = 0;
+    private String createdAt;
 
+    private int agreeCount;
+    private int disagreeCount;
+
+    private boolean agree;
+
+    private boolean disagree;
 //    private Board board;
 
     private List<CommentResponseDto> comments;
@@ -34,11 +39,15 @@ public class BoardDto {
         this.id = board.getId();
         this.title = board.getTitle();
         this.nickname = board.getMember().getNickname();
-        this.mbti = board.getMember().getMbti();
+        this.mbti = board.getMbti();
         this.content = board.getContent();
         this.image = board.getImage();
+         this.createdAt = board.getCreatedAt();
+        this.comments = comments;
+
+        this.agree = board.isAgree();
+        this.disagree = board.isDisagree();
         this.agreeCount = getAgreeCount();
         this.disagreeCount = getDisagreeCount();
-        this.comments = comments;
     }
 }

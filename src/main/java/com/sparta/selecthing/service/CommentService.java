@@ -8,6 +8,11 @@ import com.sparta.selecthing.repository.CommentRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+
 @Service
 public class CommentService {
     private final CommentRepository commentRepository;
@@ -34,9 +39,12 @@ public class CommentService {
         Board board = boardRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("게시글을 찾을 수 없습니다.")
         );
-        String content = commentSaveRequestDto.getContent();
+    //    String content = commentSaveRequestDto.getContent();
 
-        Comment writeComment = new Comment(board, content);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String DateTime = ZonedDateTime.now(ZoneId.of("Asia/Seoul")).format(formatter);
+
+        Comment writeComment = new Comment(board, commentSaveRequestDto,DateTime);
 
         commentRepository.save(writeComment);
     }

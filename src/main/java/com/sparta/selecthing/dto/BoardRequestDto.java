@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.net.URL;
 import java.util.Date;
 @NoArgsConstructor //기본생성자를 생성해줌.
 @AllArgsConstructor //전체변수를 생성하는 생성자를 만들어준다.
@@ -13,4 +14,5 @@ public class BoardRequestDto {
     private String title;
     private String content;
     private String image;
+    private String mbti;
 }

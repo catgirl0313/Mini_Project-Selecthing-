@@ -1,5 +1,6 @@
 package com.sparta.selecthing.controller;
 
+import com.sparta.selecthing.service.CommentService;
 import com.sparta.selecthing.dto.CommentResponseDto;
 import com.sparta.selecthing.dto.CommentSaveRequestDto;
 import com.sparta.selecthing.service.CommentService;
@@ -28,13 +29,11 @@ public class CommentController {
 
     //댓글 작성
     @PostMapping("/boards/{id}/comments") //@AuthenticationPrincipal principalDetail principalDetail
-    public ResponseEntity<CommentResponseDto> writeComment(
+    public HttpStatus writeComment(
             @PathVariable Long id, @RequestBody CommentSaveRequestDto commentSaveRequestDto){
-//        String nickname = userDtails.getNickname();
-//        commentSaveRequestDto.setNickname(userDtails.getMember().getNickname());
         commentService.writeComment(id, commentSaveRequestDto);
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(null);
+
+        return HttpStatus.OK;
     }
     //댓글 삭제
 //    @DeleteMapping("/board/{boardId}/comments")
