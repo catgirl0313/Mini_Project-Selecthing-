@@ -5,13 +5,11 @@ import com.sparta.selecthing.service.CommentService;
 import com.sparta.selecthing.dto.CommentSaveRequestDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
+//@CrossOrigin("http://localhost:3000")
 public class CommentController {
     private final CommentService commentService;
 

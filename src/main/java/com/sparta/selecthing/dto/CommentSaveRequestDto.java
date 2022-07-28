@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @Data
 public class CommentSaveRequestDto {
 
-    private String nickname;
     private String mbit;
     private String content;
 }

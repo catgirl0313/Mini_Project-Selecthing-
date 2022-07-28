@@ -4,12 +4,14 @@ import com.sparta.selecthing.Main.MainResponseDto;
 import com.sparta.selecthing.Main.MainService;
 import com.sparta.selecthing.security.UserDetailsImpl;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
+//@CrossOrigin("http://localhost:3000")
 public class MainController {
     private final MainService mainService;
 

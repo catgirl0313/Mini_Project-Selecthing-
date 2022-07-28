@@ -11,6 +11,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -48,7 +49,11 @@ public class Board {
     @OrderBy("id desc")
     private List<Comment> comments;
 
-    //작성일자.
+    /*@OneToMany(mappedBy = "board", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE) //mappedBy 연관관계의 주인이 아니다(나는 FK가 아니에요) DB에 컬럼 만들지 마세요.
+    private List<String> yesnamegroup;
+*/
+
+      //작성일자.
     @CreatedDate
     @Column(updatable = false)
     private String createdAt;

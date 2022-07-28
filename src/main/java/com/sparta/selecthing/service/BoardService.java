@@ -11,19 +11,16 @@ import com.sparta.selecthing.model.Board;
 import com.sparta.selecthing.repository.MemberRepository;
 import com.sparta.selecthing.model.Member;
 import com.sparta.selecthing.repository.BoardRepository;
-import org.hibernate.annotations.DynamicUpdate;
+import com.sparta.selecthing.repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.constraints.Null;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 @Service
 public class BoardService {
@@ -32,10 +29,13 @@ public class BoardService {
     private final CommentRepository commentRepository;
     private final MemberRepository memberRepository;
 
-    public BoardService(BoardRepository boardRepository, CommentRepository commentRepository, MemberRepository memberRepository) {
+    private final UserRepository userRepository;
+
+    public BoardService(BoardRepository boardRepository, CommentRepository commentRepository, MemberRepository memberRepository, UserRepository userRepository) {
         this.boardRepository = boardRepository;
         this.commentRepository = commentRepository;
         this.memberRepository = memberRepository;
+        this.userRepository = userRepository;
     }
 
     //글 상세보기
@@ -86,9 +86,12 @@ public class BoardService {
         int sum = 0;
         Board board = boardRepository.findById(boardId)
                 .orElseThrow(() -> new CustomExcepton(HttpStatus.BAD_REQUEST));
+        Member member = userRepository.findById(memberId)
+                .orElseThrow(() -> new CustomExcepton(HttpStatus.BAD_REQUEST));
 
         if (boardYesandNoDto.isAgree()) {
-            if(boardYesandNoDto.getAgreeCount() != board.getAgreeCount()) {
+            if(boardYesandNoDto.getAgreeCount() != board.getAgreeCount()){
+
                 board.setAgreeCount(boardYesandNoDto.getAgreeCount());
                 board.setAgree(boardYesandNoDto.isAgree());
             }
