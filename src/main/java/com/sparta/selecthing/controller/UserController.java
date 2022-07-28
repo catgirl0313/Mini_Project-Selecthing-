@@ -13,22 +13,9 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
     private final UserService userService;
-
-    // 회원 로그인
-//    @PostMapping("/user/login")
-//    public String login(@RequestBody LoginRequestDto loginRequestDto) {
-//        if (userService.login(loginRequestDto)) {
-//            String token = jwtTokenProvider.createToken(loginRequestDto.getUsername());
-//            System.out.println(token);
-//            return token;
-//        } else {
-//            return "false";
-//        }
-//    }
 
     // 회원 가입 요청 처리
     @PostMapping("/user/signup")

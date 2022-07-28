@@ -4,7 +4,6 @@ import com.sparta.selecthing.Main.MainResponseDto;
 import com.sparta.selecthing.Main.MainService;
 import com.sparta.selecthing.security.UserDetailsImpl;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

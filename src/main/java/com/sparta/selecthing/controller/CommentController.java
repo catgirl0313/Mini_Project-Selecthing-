@@ -1,18 +1,17 @@
 package com.sparta.selecthing.controller;
 
-import com.azul.crs.client.Result;
-import com.sparta.selecthing.service.CommentService;
 import com.sparta.selecthing.dto.CommentResponseDto;
 import com.sparta.selecthing.dto.CommentSaveRequestDto;
+import com.sparta.selecthing.service.CommentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
 public class CommentController {
     private final CommentService commentService;
 
