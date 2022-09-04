@@ -21,4 +21,6 @@ https://www.youtube.com/watch?v=sxLikOiE2X0&t=104s
 
 sxLikOiE2X0&t=104s
 [![Video Label](http://img.youtube.com/vi/sxLikOiE2X0&t=104s/0.jpg)](https://youtu.be/sxLikOiE2X0&t=104s)
-![selectthing](https://user-images.githubusercontent.com/97043760/188316668-cefa9c12-3d93-41f5-8661-4b753e332065.JPG)
+
+
+[![selectthing](https://user-images.githubusercontent.com/97043760/188316668-cefa9c12-3d93-41f5-8661-4b753e332065.JPG)](https://youtu.be/sxLikOiE2X0&t=104s)
