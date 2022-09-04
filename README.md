@@ -5,3 +5,10 @@
 
 
 <iframe width="1519" height="553" src="https://www.youtube.com/embed/sxLikOiE2X0" title="selecthing" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<h2>실행 화면</h2>
+<img width="50%" src="https://user-images.githubusercontent.com/56526225/175202009-183b35b9-1850-40f7-a6ae-826ba4dc19fd.gif"/>
+
+https://youtu.be/sxLikOiE2X0
+
+<br>
