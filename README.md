@@ -12,8 +12,13 @@
 https://youtu.be/sxLikOiE2X0
 
 <img src="https://youtu.be/sxLikOiE2X0">
-[![IU(아이유) _ Into the I-LAND](http://img.youtube.com/vi/QYNwbZHmh8g/0.jpg)](https://youtu.be/QYNwbZHmh8g?t=0s)
 
-<iframe width="640" height="360" src="https://www.youtube.com/embed/6Az2cNU7gUw" frameborder="0" gesture="media" allowfullscreen=""></iframe>
+https://www.youtube.com/watch?v=sxLikOiE2X0&t=104s
 
-<br>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/" frameborder="0" allowfullscreen></iframe>
+
+  {% include 파일명.html id="https://youtu.be/sxLikOiE2X0" %}  
+{%inclde
+sxLikOiE2X0&t=104s
+[!Video Label](http://img.youtube.com/vi/sxLikOiE2X0&t=104s/0.jpg)](https://youtu.be/sxLikOiE2X0&t=104s)
+
