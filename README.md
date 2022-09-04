@@ -18,7 +18,7 @@ https://www.youtube.com/watch?v=sxLikOiE2X0&t=104s
 <iframe width="560" height="315" src="https://www.youtube.com/embed/" frameborder="0" allowfullscreen></iframe>
 
   {% include 파일명.html id="https://youtu.be/sxLikOiE2X0" %}  
-{%inclde
+
 sxLikOiE2X0&t=104s
-[!Video Label](http://img.youtube.com/vi/sxLikOiE2X0&t=104s/0.jpg)](https://youtu.be/sxLikOiE2X0&t=104s)
+[![Video Label](http://img.youtube.com/vi/sxLikOiE2X0&t=104s/0.jpg)](https://youtu.be/sxLikOiE2X0&t=104s)
 
