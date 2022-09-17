@@ -28,6 +28,10 @@
 와이어프레임
 https://ovenapp.io/view/dN7sAXB0LPnRX459Z2kHYIJGLcNzFKZM/sxkhw
 
+
+노션
+https://stone-olivine-375.notion.site/Mini-Project-5-S-A-8d3bd80b733f40b69f9004c97d470b34
+
 <!-- [API](https://www.notion.so/2e99a7505bee49fc8478c6318542d0ea) -->
 
 
