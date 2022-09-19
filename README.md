@@ -24,6 +24,8 @@
   
 <br>
 
+웹사이트
+http://miniproject.complete.s3-website.ap-northeast-2.amazonaws.com/selecthing
 
 와이어프레임
 https://ovenapp.io/view/dN7sAXB0LPnRX459Z2kHYIJGLcNzFKZM/sxkhw
